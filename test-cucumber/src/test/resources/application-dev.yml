@@ -1,0 +1,7 @@
+credential:
+  dev:
+    user.name: dev.name
+    user.password: dev.password
+  test:
+    user.name: test.name
+    user.password: test.password
