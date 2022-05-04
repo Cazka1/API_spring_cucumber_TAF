@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @CucumberOptions(
         stepNotifications = true,
         tags = "@Debug",
+//        plugin = {"pretty", "html:target/cucumber"},
         plugin = {"pretty", "html:target/cucumber", "com.epam.reportportal.cucumber.ScenarioReporter"},
         features = "classpath:feature",
         extraGlue = {"com.test.stepdef"})

@@ -1,4 +1,5 @@
 api:
   url:
-    token: https://restful-booker.herokuapp.com/auth
-    booking: https://restful-booker.herokuapp.com/booking/
+#    token: https://restful-booker.herokuapp.com/auth
+#    booking: https://restful-booker.herokuapp.com/booking/
+    base: https://restful-booker.herokuapp.com

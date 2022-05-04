@@ -1,17 +1,15 @@
 package com.test.client;
 
 import com.test.dto.booking_details.BookingDetails;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import static com.test.enums.EndPointEnum.AUTH;
+import static com.test.enums.EndPointEnum.BOOKING;
+import static com.test.enums.EndPointEnum.ID;
+
 
 @Component
 public class RestClient extends BaseApiConfig {
-
-    public static final String ID = "%s";
-    @Value("${api.url.token}")
-    private String tokenUrl;
-    @Value("${api.url.booking}")
-    private String bookingUrl;
 
     public String getAuthCreateToken() {
         String body = "{ \"username\" : \"admin\",\n" +
@@ -19,7 +17,7 @@ public class RestClient extends BaseApiConfig {
         return getGeneralRequest()
                 .header("Content-Type", "application/json")
                 .body(body)
-                .post(tokenUrl)
+                .post(baseUrl + AUTH.getEndPoint())
                 .then()
                 .log()
                 .all()
@@ -31,10 +29,22 @@ public class RestClient extends BaseApiConfig {
 
     }
 
-    public BookingDetails getBooking() {
+    public String getBooking() {
         return getGeneralRequest()
                 .header("Accept", "application/json")
-                .get(bookingUrl + String.format(ID,8))
+                .get(baseUrl + BOOKING.getEndPoint())
+                .then()
+                .log()
+                .all()
+                .statusCode(200)
+                .extract()
+                .body()
+                .asString();
+    }
+    public BookingDetails getBookingById(int id) {
+        return getGeneralRequest()
+                .header("Accept", "application/json")
+                .get(baseUrl + BOOKING.getEndPoint() + String.format(ID.getEndPoint(), id))
                 .then()
                 .log()
                 .all()
